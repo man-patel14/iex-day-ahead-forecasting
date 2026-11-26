@@ -1,0 +1,11 @@
+__pycache__/
+.pytest_cache/
+*.pyc
+.venv/
+data/*.csv
+data/raw/
+!data/.gitkeep
+mlruns/
+.DS_Store
+# Derived files that contain exchange prices are not redistributed
+*.npz

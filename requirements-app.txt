@@ -1,0 +1,5 @@
+# Dashboard and API (optional)
+streamlit
+plotly
+fastapi
+uvicorn

@@ -1,0 +1,14 @@
+{
+  "data_source": "REAL (declared by the user; provenance is not verified by this code)",
+  "data_path": "data\\iex_dam_weather.csv",
+  "n_days": 1304,
+  "test_start": "2025-11-25",
+  "test_end": "2026-11-24",
+  "info_lag_days": 1,
+  "warnings": [
+    "18.9% of blocks sit at the price cap: check units (Rs/MWh vs Rs/kWh) and regimes",
+    "some days have constant prices (forward-filled or missing data?)",
+    "solar_fc not provided: its feature group is skipped",
+    "demand_fc not provided: its feature group is skipped"
+  ]
+}

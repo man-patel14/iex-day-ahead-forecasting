@@ -1,0 +1,214 @@
+{
+  "data_source": "REAL (declared by the user; provenance is not verified by this code)",
+  "models": {
+    "naive (last known day)": {
+      "MAE": 0.6571940482305936,
+      "RMSE": 1.3281154788644904,
+      "DirAcc": NaN
+    },
+    "seasonal naive (same block last week)": {
+      "MAE": 0.8976231429794521,
+      "RMSE": 1.639974257445799,
+      "DirAcc": 0.6240920667861523
+    },
+    "GBM quantile: price_only": {
+      "MAE": 0.5284994952404687,
+      "RMSE": 0.9779637848896474,
+      "DirAcc": 0.6624846712574285,
+      "Pinball": 0.18000801751023293,
+      "Cov80": 0.7977454337899543,
+      "Cov80 raw": 0.7110445205479452,
+      "Cov80 fixed margin": 0.7829052511415525
+    },
+    "GBM quantile: price+weather": {
+      "MAE": 0.5270573049255651,
+      "RMSE": 0.9811588058629034,
+      "DirAcc": 0.6679872967958997,
+      "Pinball": 0.17935823320863728,
+      "Cov80": 0.7936929223744292,
+      "Cov80 raw": 0.7199771689497717,
+      "Cov80 fixed margin": 0.7870719178082192
+    },
+    "GBM quantile: price+weather_anom": {
+      "MAE": 0.5198009023029755,
+      "RMSE": 0.9702853088643155,
+      "DirAcc": 0.667830078923372,
+      "Pinball": 0.17779811559317277,
+      "Cov80": 0.7902111872146119,
+      "Cov80 raw": 0.7344178082191781,
+      "Cov80 fixed margin": 0.7895833333333333
+    },
+    "GBM quantile: price+volumes": {
+      "MAE": 0.5299227945412438,
+      "RMSE": 0.9834548545457468,
+      "DirAcc": 0.6591830959343458,
+      "Pinball": 0.17843168095424947,
+      "Cov80": 0.7964897260273973,
+      "Cov80 raw": 0.7048230593607306,
+      "Cov80 fixed margin": 0.785587899543379
+    }
+  },
+  "agent": [
+    {
+      "strategy": "always buy DAM",
+      "avg cost (Rs/kWh)": 3.9940349737442915,
+      "saving vs benchmark (%)": 0.03789116210282721,
+      "share of oracle saving captured (%)": 0.4001308571889778,
+      "blocks bought on DAM (%)": 100.0
+    },
+    {
+      "strategy": "never buy (benchmark only)",
+      "avg cost (Rs/kWh)": 3.9955489336676453,
+      "saving vs benchmark (%)": 0.0,
+      "share of oracle saving captured (%)": 0.0,
+      "blocks bought on DAM (%)": 0.0
+    },
+    {
+      "strategy": "naive rule (buy if last known price < benchmark)",
+      "avg cost (Rs/kWh)": 3.849284692310828,
+      "saving vs benchmark (%)": 3.6606795157569603,
+      "share of oracle saving captured (%)": 38.65679359632715,
+      "blocks bought on DAM (%)": 43.63013698630137
+    },
+    {
+      "strategy": "agent (price_only)",
+      "avg cost (Rs/kWh)": 3.8623220961757987,
+      "saving vs benchmark (%)": 3.334381325410357,
+      "share of oracle saving captured (%)": 35.21108310984785,
+      "blocks bought on DAM (%)": 9.357876712328766
+    },
+    {
+      "strategy": "agent (price+weather)",
+      "avg cost (Rs/kWh)": 3.8424695196102414,
+      "saving vs benchmark (%)": 3.831248636889732,
+      "share of oracle saving captured (%)": 40.458004350001396,
+      "blocks bought on DAM (%)": 10.824771689497718
+    },
+    {
+      "strategy": "agent (price+weather_anom)",
+      "avg cost (Rs/kWh)": 3.8532023369210697,
+      "saving vs benchmark (%)": 3.562629293490118,
+      "share of oracle saving captured (%)": 37.621382769476995,
+      "blocks bought on DAM (%)": 10.990296803652969
+    },
+    {
+      "strategy": "agent (price+volumes)",
+      "avg cost (Rs/kWh)": 3.8705632908105025,
+      "saving vs benchmark (%)": 3.1281219409923318,
+      "share of oracle saving captured (%)": 33.03298300126613,
+      "blocks bought on DAM (%)": 8.593036529680367
+    },
+    {
+      "strategy": "agent TUNED on validation (price+volumes, lambda=0.0, guard=1.01)",
+      "avg cost (Rs/kWh)": 3.7659798423026745,
+      "saving vs benchmark (%)": 5.745620818970719,
+      "share of oracle saving captured (%)": 60.673783958873436,
+      "blocks bought on DAM (%)": 32.73972602739726
+    },
+    {
+      "strategy": "oracle (hindsight, upper bound)",
+      "avg cost (Rs/kWh)": 3.6171827326728634,
+      "saving vs benchmark (%)": 9.469692582327284,
+      "share of oracle saving captured (%)": 100.0,
+      "blocks bought on DAM (%)": 44.15239726027397
+    }
+  ],
+  "dm": [
+    {
+      "model A": "GBM quantile: price_only",
+      "vs model B": "seasonal naive (same block last week)",
+      "MAE diff (A-B)": -0.3691236477389834,
+      "95% CI": "[-0.455, -0.293]",
+      "DM stat (neg = A better)": -8.489679674385078,
+      "p-value": 0.0
+    },
+    {
+      "model A": "GBM quantile: price_only",
+      "vs model B": "naive (last known day)",
+      "MAE diff (A-B)": -0.12869455299012492,
+      "95% CI": "[-0.164, -0.094]",
+      "DM stat (neg = A better)": -6.546752259005919,
+      "p-value": 5.880185227624679e-11
+    },
+    {
+      "model A": "GBM quantile: price+weather",
+      "vs model B": "seasonal naive (same block last week)",
+      "MAE diff (A-B)": -0.37056583805388693,
+      "95% CI": "[-0.456, -0.295]",
+      "DM stat (neg = A better)": -8.54699084320104,
+      "p-value": 0.0
+    },
+    {
+      "model A": "GBM quantile: price+weather",
+      "vs model B": "naive (last known day)",
+      "MAE diff (A-B)": -0.1301367433050285,
+      "95% CI": "[-0.167, -0.094]",
+      "DM stat (neg = A better)": -6.481224355350476,
+      "p-value": 9.09812225557971e-11
+    },
+    {
+      "model A": "GBM quantile: price+weather_anom",
+      "vs model B": "seasonal naive (same block last week)",
+      "MAE diff (A-B)": -0.3778222406764765,
+      "95% CI": "[-0.464, -0.302]",
+      "DM stat (neg = A better)": -8.585744743998406,
+      "p-value": 0.0
+    },
+    {
+      "model A": "GBM quantile: price+weather_anom",
+      "vs model B": "naive (last known day)",
+      "MAE diff (A-B)": -0.13739314592761806,
+      "95% CI": "[-0.172, -0.105]",
+      "DM stat (neg = A better)": -7.361276122572269,
+      "p-value": 1.8207657603852567e-13
+    },
+    {
+      "model A": "GBM quantile: price+volumes",
+      "vs model B": "seasonal naive (same block last week)",
+      "MAE diff (A-B)": -0.36770034843820826,
+      "95% CI": "[-0.456, -0.292]",
+      "DM stat (neg = A better)": -8.309085034361658,
+      "p-value": 0.0
+    },
+    {
+      "model A": "GBM quantile: price+volumes",
+      "vs model B": "naive (last known day)",
+      "MAE diff (A-B)": -0.1272712536893498,
+      "95% CI": "[-0.159, -0.095]",
+      "DM stat (neg = A better)": -7.101190651444363,
+      "p-value": 1.2367884494324244e-12
+    },
+    {
+      "model A": "GBM quantile: price+weather",
+      "vs model B": "GBM quantile: price_only",
+      "MAE diff (A-B)": -0.0014421903149035883,
+      "95% CI": "[-0.009, 0.006]",
+      "DM stat (neg = A better)": -0.36813956731873493,
+      "p-value": 0.7127691689487756
+    },
+    {
+      "model A": "GBM quantile: price+weather_anom",
+      "vs model B": "GBM quantile: price_only",
+      "MAE diff (A-B)": -0.008698592937493154,
+      "95% CI": "[-0.017, -0.001]",
+      "DM stat (neg = A better)": -2.059169066926402,
+      "p-value": 0.03947804533035937
+    },
+    {
+      "model A": "GBM quantile: price+weather_anom",
+      "vs model B": "GBM quantile: price+weather",
+      "MAE diff (A-B)": -0.007256402622589565,
+      "95% CI": "[-0.017, 0.002]",
+      "DM stat (neg = A better)": -1.456866637717384,
+      "p-value": 0.1451531968863038
+    },
+    {
+      "model A": "GBM quantile: price+volumes",
+      "vs model B": "GBM quantile: price_only",
+      "MAE diff (A-B)": 0.0014232993007751286,
+      "95% CI": "[-0.011, 0.014]",
+      "DM stat (neg = A better)": 0.22000850058573862,
+      "p-value": 0.8258645343896835
+    }
+  ]
+}
